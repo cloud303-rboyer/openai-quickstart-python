@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+  <title>Converse OpenAI</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+    <h3>General conversation</h3>
+    <form action="/conversation" method="post">
+    <input type="text" name="conversation" placeholder="Have a conversation" required />
+    <input type="submit" value="Have a conversation" />
+    </form>
+    {% if result %}
+    <div class="result">{{ result }}</div>
+    {% endif %}
+</body>

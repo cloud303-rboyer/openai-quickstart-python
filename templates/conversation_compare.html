@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+  <title>Conversation Compare</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <h3>Compare conversations</h3>
+  <form action="/conversation_compare" method="post">
+    <input type="text" name="human" placeholder="Have a conversation" required />
+    <input type="submit" value="Compare conversations" />
+  </form>
+  <table border="1" cellpadding="4"><head><tr><td>
+      Input
+    </td><td>
+      Ada
+    </td><td>
+      Babbage
+    </td><td>
+      Curie
+    </td><td>
+      Davinci
+    </td></tr>
+  </head>
+  <body>
+    <tr><td style="valign: top">
+      {% if human %}
+      <div class="result">{{ human }}</div>
+      {% endif %}    
+    </td><td style="valign: top">
+      {% if responseAda %}
+      <div class="result">{{ responseAda }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if responseBabbage %}
+      <div class="result">{{ responseBabbage }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if responseCurie %}
+      <div class="result">{{ responseCurie }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if responseDavinci %}
+      <div class="result">{{ responseDavinci }}</div>
+      {% endif %}
+    </td></tr>
+  </body>    
+</table>
+</body>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+  <title>Spades Answers</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+    <h3>Ask a rules question</h3>
+    <form action="/spades_answers" method="post">
+    <input type="text" name="question" placeholder="Enter a rules question" required />
+    <input type="submit" value="Ask question" />
+    </form>
+    {% if result %}
+    <div class="result">{{ result }}</div>
+    {% endif %}
+</body>
