@@ -11,6 +11,17 @@
 <body>
   <h3>Compare conversations</h3>
   <form action="/conversation_compare" method="post">
+    <select name="attitude">
+      <option value="friendly">friendly</option>
+      <option value="helpful">helpful</option>
+      <option value="creative">creative</option>
+      <option value="clever">clever</option>
+      <option value="joyful">joyful</option>
+      <option value="positive">positive</option>
+      <option value="annoying">annoying</option>
+      <option value="sarcastic">sarcastic</option>
+      <option value="drole">drole</option>
+    </select>
     <input type="text" name="human" placeholder="Have a conversation" required />
     <input type="submit" value="Compare conversations" />
   </form>
@@ -28,6 +39,10 @@
   </head>
   <body>
     <tr><td style="valign: top">
+      {% if attitude %}
+      <div class="result">{{ attitude }}</div>
+      {% endif %}    
+    </td><td style="valign: top">
       {% if human %}
       <div class="result">{{ human }}</div>
       {% endif %}    

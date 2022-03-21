@@ -188,7 +188,7 @@ def conversation_compare():
 
 
 def generate_conversation_prompt(conversation):
-    return """The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.
+    return """The following is a conversation with an AI assistant. The assistant is rude, annoying, clever, and very sarcastic.
 Hello, who are you?
 I am an AI created by OpenAI. How can I help you today?
 Do you like spades?
@@ -240,12 +240,141 @@ Message: Stupid
 Response: Negative
 Message: Great play partner
 Response: Positive
+Message: glp
+Response: Positive
+Message: gl
+Response: Positive
 Message: n n p
+Response: Positive
+Message: nn
 Response: Positive
 Message: {}
 Response:""".format(
         conversation.capitalize()
     )
+
+
+
+
+@app.route("/encapsulate_compare", methods=("GET", "POST"))
+def encapsulate_compare():
+    if request.method == "POST":
+        engine = request.form["engine"]
+        human = request.form["human"]
+        print( "Conversation starter:", human )
+        response1 = openai.Completion.create(
+            engine='text-ada-001',
+            prompt=generate_encapsulate_prompt_1(human),
+            temperature=0.9,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0.6,
+            stop=[" Human:", " AI:"]
+        )
+        print( "response1:", response1 )
+
+        response2 = openai.Completion.create(
+            engine='text-ada-001',
+            prompt=generate_encapsulate_prompt_2(human),
+            temperature=0.9,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0.6,
+            stop=[" Human:", " AI:"]
+        )
+        print( "response2:", response2 )
+
+        response3 = openai.Completion.create(
+            engine='text-ada-001',
+            prompt=generate_encapsulate_prompt_3(human),
+            temperature=0.9,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0.6,
+            stop=[" Human:", " AI:"]
+        )
+        print( "response3:", response3 )
+
+        response4 = openai.Completion.create(
+            engine='text-ada-001',
+            prompt=generate_encapsulate_prompt_4(human),
+            temperature=0.9,
+            max_tokens=150,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0.6,
+            stop=[" Human:", " AI:"]
+        )
+        print( "response4:", response4 )
+
+
+        return redirect(url_for("encapsulate_compare", engine=engine, human=human, response1=response1.choices[0].text,
+            response2=response2.choices[0].text, response3=response3.choices[0].text, response4=response4.choices[0].text))
+
+    engine = request.args.get("engine")
+    human = request.args.get("human")
+    response1 = request.args.get("response1")
+    response2 = request.args.get("response2")
+    response3 = request.args.get("response3")
+    response4 = request.args.get("response4")
+    return render_template("encapsulate_compare.html", engine=engine, human=human, response1=response1, response2=response2, response3=response3, response4=response4 )
+
+
+#     return """The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.
+
+def generate_encapsulate_prompt_1(conversation):
+    return """The following is a conversation with an AI assistant. The assistant is rude, clever, and very sarcastic.
+A new study has found that Biden has successfully handled the border crisis by reducing the amount of media coverage of the border crisis by 867%. 
+'Biden has expertly handled this crisis, reducing the number of media reports of the problem significantly,' said Jen Psaki in a press conference today. 'Under the previous administration, there were thousands of news stories a day on the poor conditions of the migrants at the border. Under Biden, that number is way, way lower.'
+
+{}
+""".format(
+        conversation
+    )
+
+def generate_encapsulate_prompt_2(conversation):
+    return """The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.
+Twenty-one Ukrainian rescue workers have been killed and 47 have been injured so far due to shelling by Russian troops, said the deputy head of the State Emergency Service of Ukraine, Roman Prymush, during a news briefing with Ukrinform on Monday.
+'According to the Geneva Convention, shelling or other threats to rescuers at the time of rescue operations are considered a war crime. We record all these cases, the materials on each of them are transferred to the relevant bodies, which will provide a legal assessment of such actions, will identify the perpetrators involved,' Prymush said.
+He noted that the detention of rescuers by Russian forces is also a violation of the Geneva Convention. 
+Prymush added it will be the subject of proceedings in international courts, which are already underway.
+
+{}
+""".format(
+        conversation
+    )
+
+def generate_encapsulate_prompt_3(conversation):
+    return """The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.
+Lia Thomas has dominated women’s college swimming this season—and has also become a lightning rod for controversy. Many—including some teammates—say she shouldn’t be able to compete against other women. In an exclusive interview with Sports Illustrated, Thomas explains why she has to.
+Fresh off her final practice of the week, the most controversial athlete in America sat in the corner of a nearly empty Philadelphia coffeehouse with her back to the wall. Lia Thomas had done some of her best work this season while feeling cornered. On this January evening her long torso was wrapped in a University of Pennsylvania swim and dive jacket, her hair still damp from a swim—roughly three miles staring at the black line on the bottom of the pool. She looked exhausted. As college students across the country were digging into their Friday nights, Thomas was thinking about her weekend plans: sleeping, studying and another grueling swim practice.
+
+{}
+""".format(
+        conversation
+    )
+
+def generate_encapsulate_prompt_4(conversation):
+    return """The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.
+The trick to making money in the stock market is to know what to buy, and most importantly, when to buy it.
+The last 4 stocks I wrote about jumped 400% but today I believe we have the opportunity to make up to 1,000% on a single stock.
+The reason for that? World instability.
+I think we can all agree that no matter what happens, people need to eat.
+The population is increasing every day and there is simply not enough food.
+On top of that, Russia is the No1 world exporter of wheat and other crops and with the sanctions hitting them we are going to have to be more reliant on other sources.
+The best way to address this is by increasing yields from our current farms, right here in America and one American company has been deploying a game-changing product:
+That company is: “CGS International Inc” (Stock symbol: CGSI)
+
+{}
+""".format(
+        conversation
+    )
+
+
+
 
 
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+  <title>Encapsulate Compare</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='dog.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <h3>Compare conversation encapsulation</h3>
+  <form action="/encapsulate_compare" method="post">
+    <select name="engine">
+      <option value="text-ada-001">Ada</option>
+      <option value="text-babbage-001">Babbage</option>
+      <option value="text-curie-001">Curie</option>
+      <option value="text-davinci-002">DaVinci</option>
+    </select>
+    <input type="text" name="human" placeholder="Have an encapsulated conversation" required />
+    <input type="submit" value="Compare encapsulations" />
+  </form>
+  <table border="1" cellpadding="4"><head><tr><td>
+      Engine
+    </td><td>
+      Input
+    </td><td>
+      Babalon Bee
+    </td><td>
+      Ukraine
+    </td><td>
+      Lia Thomas
+    </td><td>
+      Economic
+    </td></tr>
+  </head>
+  <body>
+    <tr><td style="valign: top">
+      {% if engine %}
+      <div class="result">{{ engine }}</div>
+      {% endif %}    
+    </td><td style="valign: top">
+      {% if human %}
+      <div class="result">{{ human }}</div>
+      {% endif %}    
+    </td><td style="valign: top">
+      {% if response1 %}
+      <div class="result">{{ response1 }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if response2 %}
+      <div class="result">{{ response2 }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if response3 %}
+      <div class="result">{{ response3 }}</div>
+      {% endif %}
+    </td><td style="valign: top">
+      {% if response4 %}
+      <div class="result">{{ response4 }}</div>
+      {% endif %}
+    </td></tr>
+  </body>    
+</table>
+</body>
